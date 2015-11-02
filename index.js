@@ -8,6 +8,9 @@ module.exports = {
 	Request: require('./lib/Request'),
 	Response: require('./lib/Response'),
 	Event: require('./lib/Event'),
+	ToyPad: require('./lib/ToyPad'),
+	ToyPadEmu: require('./lib/ToyPadEmu'),
+	Tag: require('./lib/Tag'),
 	transports:{
 		TCPServerTransport: require('./transports/tcp').TCPServerTransport,
 		TCPClientTransport: require('./transports/tcp').TCPClientTransport,

@@ -36,6 +36,10 @@ function TCPServerTransport(port){
 	self.srv.listen(port)
 }
 
+TCPServerTransport.prototype.port = function(){
+	return this.srv.address().port;
+}
+
 TCPServerTransport.prototype.write = function(buffer){
 	var self = this
 	this.clients.forEach(function(c){
