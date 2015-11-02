@@ -1,9 +1,9 @@
 var fs = require('fs')
 var ld = require('../')
-var Frame = ld.common.Frame
-var Request = ld.common.Request
-var Response = ld.common.Response
-var Event = ld.common.Event
+var Frame = ld.Frame
+var Request = ld.Request
+var Response = ld.Response
+var Event = ld.Event
 
 // var usb = new ld.transports.LibUSBTransport()
 var usb = new ld.transports.RawTransport('/dev/hidraw0')
