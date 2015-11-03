@@ -33,7 +33,7 @@ function TCPServerTransport(port){
 		c.on('end',function(){
 			console.log('client disconnected')
 			var ind = self.clients.indexOf(c)
-			self.clients = self.clients.splice(ind,1)
+			self.clients.splice(ind,1)
 		})
 	})
 
@@ -52,7 +52,7 @@ TCPServerTransport.prototype.write = function(buffer){
 		}catch(e){
 			var ind = self.clients.indexOf(c)
 			console.log('Exception in client',ind,e)
-			self.clients = self.clients.splice(ind,1)
+			self.clients.splice(ind,1)
 		}
 	})
 }
