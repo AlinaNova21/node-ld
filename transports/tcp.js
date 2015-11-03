@@ -69,6 +69,6 @@ function dataBuffer(cb){
 }
 
 module.exports = {
-	client: TCPClientTransport,
-	server: TCPServerTransport
+	TCPClientTransport: TCPClientTransport,
+	TCPServerTransport: TCPServerTransport
 }

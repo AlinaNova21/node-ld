@@ -1,7 +1,7 @@
 var ld = require('../')
 
 var usb = new ld.transports.LibUSBTransport()
-var tcpserv = new ld.transports.TCPServerTransport(9998)
+var tcpserv = new ld.transports.TCPServerTransport(9999)
 
 usb.on('data',function(data){
 	tcpserv.write(data)

@@ -1,0 +1,1 @@
+SUBSYSTEMS=="usb",ATTRS{idVendor}=="0e6f",ATTRS{idProduct}=="0241", SYMLINK+="lego0",,GROUP="usb",MODE="666"
