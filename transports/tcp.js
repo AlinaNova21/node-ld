@@ -6,6 +6,7 @@ util.inherits(TCPServerTransport, EventEmitter);
 
 function TCPClientTransport(host,port){
 	var self = this
+	EventEmitter.call(this)
 	var client = self.client = net.connect({ 
 		host: host,
 		port: port 
@@ -23,11 +24,14 @@ TCPClientTransport.prototype.write = function(buffer){
 
 function TCPServerTransport(port){
 	var self = this
+	EventEmitter.call(this)
 	self.clients = [];
 	self.srv = net.createServer(function(c){
-		clients.push(c)
+		console.log('client connected')
+		self.clients.push(c)
 		c.on('data',dataBuffer(self.emit.bind(self,'data')))
-		c.on('end',function(){ 
+		c.on('end',function(){
+			console.log('client disconnected')
 			var ind = self.clients.indexOf(c)
 			self.clients = self.clients.splice(ind,1)
 		})
@@ -47,6 +51,7 @@ TCPServerTransport.prototype.write = function(buffer){
 			c.write(buffer)
 		}catch(e){
 			var ind = self.clients.indexOf(c)
+			console.log('Exception in client',ind,e)
 			self.clients = self.clients.splice(ind,1)
 		}
 	})
@@ -61,7 +66,7 @@ function dataBuffer(cb){
 		while(ind >= 0x20){
 			var b = new Buffer(0x20)
 			buf.copy(b,0)
-			cb('data',b)
+			cb(b)
 			buf.copy(buf,0,0x20)
 			ind -= 0x20
 		}
