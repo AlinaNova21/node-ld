@@ -11,7 +11,7 @@ emu.use(function(req,res){
 })
 
 emu.use(emu.CMD_WAKE,function(req,res){
-	res.payload = new Buffer([])
+	res.payload = new Buffer('002F020102020402F500194353DC39B3AE4618C905FE802C','hex')
 	if(req.payload.toString() != '(c) LEGO 2014')
 		res.cancel()
 })
