@@ -3,6 +3,8 @@ var util = require('util')
 var EventEmitter = require('events').EventEmitter;
 util.inherits(LibUSBTransport, EventEmitter);
 
+var isWin = process.platform === 'win32'
+
 function LibUSBTransport(){
 	var self = this
 	var dev = self.dev = usb.findByIds(0x0e6f,0x0241);
@@ -11,7 +13,7 @@ function LibUSBTransport(){
 
 	dev.open()
 	var inter = dev.interface(0x00)
-	if(inter.isKernelDriverActive())
+	if(!isWin && inter.isKernelDriverActive())
 		inter.detachKernelDriver()
 	inter.claim()
 	var devin 	= self.devin	= inter.endpoint(0x81)
