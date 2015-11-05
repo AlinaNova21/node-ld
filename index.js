@@ -1,6 +1,7 @@
 
 module.exports = {
 	common: require('./lib/common'),
+	JSONRPC: require('./lib/JSONRPC'),
 	constants: require('./lib/constants'),
 	Frame: require('./lib/Frame'),
 	Request: require('./lib/Request'),
