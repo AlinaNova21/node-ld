@@ -11,10 +11,23 @@ module.exports = {
 	ToyPadEmu: require('./lib/ToyPadEmu'),
 	Tag: require('./lib/Tag'),
 	transports:{
-		TCPServerTransport: require('./transports/tcp').TCPServerTransport,
-		TCPClientTransport: require('./transports/tcp').TCPClientTransport,
-		LibUSBTransport: require('./transports/libusb'),
-		SerialTransport: require('./transports/serial'),
-		RawTransport: require('./transports/raw'),
+		get TCPServerTransport() {
+			return require('./transports/tcp').TCPServerTransport
+		},
+		get TCPClientTransport() {
+			return require('./transports/tcp').TCPClientTransport
+		},
+		get LibUSBTransport() {
+			return require('./transports/libusb')
+		},
+		get SerialTransport() {
+			return require('./transports/serial')
+		},
+		get RawTransport() {
+			return require('./transports/raw')
+		},
+		get DummyTransport() {
+			return require('./transports/dummy')
+		},
 	}
 }
