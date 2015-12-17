@@ -90,8 +90,8 @@ function init(){
 	r.cmd = Request.CMD_SEED
 	r.cid = id()
 	r.payload.fill(0)
-	r.payload[7] = 1
-	// r.payload.writeUInt32LE(seed1,0)
+	// r.payload[1] = 1
+	r.payload.writeUInt32LE(seed1,0)
 	// r.payload.writeUInt32LE(seed2,4)
 	r.payload = encrypt(r.payload)
 	write(r.build())
@@ -122,8 +122,10 @@ pad.on('data',function(data){
 		res.payload = decrypt(res.payload)
 		var a = res.payload.slice(0,4).toString('hex')
 		var b = res.payload.slice(4,8).toString('hex')
-		seed('ta',res.payload.readUInt32LE(0))
-		seed('tb',res.payload.readUInt32LE(4))
+		var tsa =res.payload.readUInt32BE(0)
+		var tsb =res.payload.readUInt32BE(4)
+		seed('ta',tsa)
+		seed('tb',tsb)
 		console.log(a,b,prng('ta').toString(16),prng('tb').toString(16))
 		console.log(nums.a.indexOf(a),nums.b.indexOf(b),nums.a.indexOf(b),nums.b.indexOf(a))
 	}else if(data[0] == 0x56)
@@ -156,7 +158,9 @@ function seed(key,value){
 function prng(key){
 	key = key || 'default'
 	prngglobal[key] = prngglobal[key] || 0
+	prngglobal[key] = flipUInt32(prngglobal[key])
     prngglobal[key] = (((prngglobal[key] * 0x19660D) >>> 0) + 0x3C6EF35F) >>> 0
+    prngglobal[key] = flipUInt32(prngglobal[key])
     return prngglobal[key]
 }
 
