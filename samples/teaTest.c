@@ -1,6 +1,5 @@
 #include <stdint.h>
 #include <stdio.h>
-#include <byteswap.h>
 
 #if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 #define le16_to_cpu(val) (val)
