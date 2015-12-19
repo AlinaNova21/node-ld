@@ -3,14 +3,34 @@ var Frame = ld.Frame
 var Request = ld.Request
 var Response = ld.Response
 var Event = ld.Event
+
 // var pad = new ld.transports.TCPClientTransport('nas.remote.ovh',9998)
-var pad = new ld.transports.TCPClientTransport('192.168.2.190',9998)
+// var pad = new ld.transports.TCPClientTransport('192.168.2.190',9998)
+var pad = new ld.transports.RawTransport('/dev/hidraw0')
+// var pad = new ld.transports.LibUSBTransport()
 
 
 var key = new Buffer([0x55,0xFE,0xF6,0x30,0x62,0xBF,0x0B,0xC1,0xC9,0xB3,0x7C,0x34,0x97,0x3E,0x29,0xFB])
 key = flipBytes(key)
 
 function init(){
+	var Burtle = require('../lib/Burtle')
+	var b = new Burtle()
+	
+	var b1 = new Buffer('14421f35b3dbc722','hex')
+	b1 = decrypt(b1)
+	b.init(b1.readUInt32LE(0))
+
+	console.log(b.rand().toString(16))
+	// WU 550ab3054f06d1707e382a3ac700000000000000000000000000000000000000
+	var b3r = new Buffer('29882b180f21b6bb','hex')
+	b3r = decrypt(b3r)
+	console.log(b3r.readUInt32LE(0).toString(16))
+	
+	console.log('D4',decrypt(new Buffer('6b3ecd1026112d3e','hex')).toString('hex'))
+	console.log('D4',decrypt(new Buffer('43d373a7ac47ec4e','hex')).toString('hex'))
+	process.exit()
+
 	// setTimeout(function(){
 	// 	pad.client.disconnect()
 	// 	process.exit()
@@ -19,15 +39,31 @@ function init(){
 	r.cmd = Request.CMD_WAKE
 	r.cid = id()
 	r.payload = new Buffer('(c) LEGO 2014')
+	console.log('REQ','WAKE')
 	write(r.build())
+
+	r.cmd = Request.CMD_SEED
+	r.cid = id()
+	r.payload = new Buffer([0,0,0,0,0,0,0,0])
+	r.payload = encrypt(r.payload)
+	console.log('REQ','SEED')
+	write(r.build())	
+
+	r.cmd = Request.CMD_CHAL
+	r.cid = id()
+	r.payload = new Buffer([0,0,0,0,0,0,0,0])
+	r.payload = encrypt(r.payload)
+	console.log('REQ','CHAL')
+	write(r.build())	
+
 
 	// r.payload = new Buffer(8)
 	// r.cmd = 0xD4
 	// r.cid = id()
-	// r.payload.fill(0)
+	// r.payload.fill(0xA)
+	// r.payload[0] = 0
 	// r.payload = encrypt(r.payload)
 	// write(r.build())
-	// console.log('REQ','D4',r.payload.toString('hex'),decrypt(r.payload).toString('hex'))
 
 	// r.payload = new Buffer(8)
 	// r.cmd = 0xD4
@@ -53,13 +89,13 @@ pad.on('data',function(data){
 	if(data[0] == 0x55)
 	{
 		var res = new Response(data)
-		console.log('RES',res.payload.toString('hex'))
+		console.log('RES',res.payload.toString('hex'),res.cid)
 		// return
-		if(!res.cid) return
+		if(res.cid < 3) return
 		res.payload = decrypt(res.payload.slice(1))
 		var a = res.payload.slice(0,4).toString('hex')
 		var b = res.payload.slice(4,8).toString('hex')
-		console.log(a,b)
+		console.log('R  ',a,b)
 		// var tsa =res.payload.readUInt32BE(0)
 		// var tsb =res.payload.readUInt32BE(4)
 		// seed('ta',tsa)
@@ -69,11 +105,12 @@ pad.on('data',function(data){
 	}else if(data[0] == 0x56)
 	{
 		var ev = new Event(data)
+		console.log('EV ',data.toString('hex'))
+		if(ev.dir == 1) return 
 		var r = new Request()
-		r.payload = new Buffer(8)
 		r.cmd = 0xD4
 		r.cid = id()
-		r.payload.fill(0)
+		r.payload = new Buffer('005c2e173cdc7983','hex')
 		r.payload[0] = ev.index
 		r.payload = encrypt(r.payload)
 		write(r.build())
