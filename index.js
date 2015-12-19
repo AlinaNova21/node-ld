@@ -59,5 +59,9 @@ module.exports = {
 		get ChromeHID() {
 			return require('./transports/chromehid')
 		},
+		get HID() {
+			return require('./transports/hid')
+		},
+
 	}
 }
