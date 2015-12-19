@@ -18,7 +18,7 @@ module.exports = {
 			return require('./transports/tcp').TCPClientTransport
 		},
 		get LibUSBTransport() {
-			// return require('./transports/libusb')
+			return require('./transports/libusb')
 		},
 		get SerialTransport() {
 			return require('./transports/serial')
