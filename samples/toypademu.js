@@ -46,22 +46,40 @@ setInterval(function(){
 
 var Gandalf = fs.readFileSync('./dumps/04A3BDFA544280.bin')
 Gandalf.uid = '04A3BDFA544280'
-var Batman = fs.readFileSync('./dumps/04686652A24081.bin')
-Batman.uid = '04686652A24081'
-var uid = new Buffer('04686652A24081','hex')
+uid = new Buffer('040DC5BA6D4081','hex')
 uid[4] = Math.round(Math.random() * 256) % 256
 uid[5] = Math.round(Math.random() * 256) % 256
 uid[6] = Math.round(Math.random() * 256) % 256
 uid[7] = Math.round(Math.random() * 256) % 256
-Batman.uid = uid.toString('hex').toUpperCase()
-console.log(Batman.uid)
-RemoveTag(1,0,Batman.uid)
-PlaceTag(1,0,Batman.uid)
+Gandalf.uid = uid.toString('hex').toUpperCase()
+
+
+
+var Batmobile = fs.readFileSync('./dumps/040DC5BA6D4081.bin')
+Batmobile.uid = '040DC5BA6D4081'
+uid = new Buffer('040DC5BA6D4081','hex')
+uid[4] = Math.round(Math.random() * 256) % 256
+uid[5] = Math.round(Math.random() * 256) % 256
+uid[6] = Math.round(Math.random() * 256) % 256
+uid[7] = Math.round(Math.random() * 256) % 256
+Batmobile.uid = uid.toString('hex').toUpperCase()
+
+Batmobile[(0x24*4)+0] = 0x60
+Batmobile[(0x24*4)+1] = 0x04
+
+var tokens = [
+	Gandalf,
+	Batmobile
+]
+
+PlaceTag(1,0,tokens[0].uid)
+PlaceTag(2,1,tokens[1].uid)
 console.log('init')
 
 function WAKE(req,res){
 	res.payload = new Buffer('286329204c45474f2032303134','hex')
-	PlaceTag(1,0,Batman.uid)
+	PlaceTag(1,0,tokens[0].uid)
+	PlaceTag(2,1,tokens[1].uid)
 }
 
 function READ(req,res){
@@ -69,14 +87,15 @@ function READ(req,res){
 	var page = req.payload[1]
 	res.payload = new Buffer(17)
 	res.payload[0] = 0
-	Batman.copy(res.payload,1,page * 4,(page * 4) + 16)
+	var start = page * 4
+	tokens[ind].copy(res.payload,1,start,start + 16)
 }
 
 function MODEL(req,res){
 	req.decrypt()
 	console.log('D4',req.payload.toString('hex'))
 	var buf = req.payload
-	buf[0] = 0x05
+	buf[0] = 34
 	buf[1] = 0
 	buf[2] = 0
 	buf[3] = 0
