@@ -1,15 +1,42 @@
 
 module.exports = {
-	common: require('./lib/common'),
-	JSONRPC: require('./lib/JSONRPC'),
-	constants: require('./lib/constants'),
-	Frame: require('./lib/Frame'),
-	Request: require('./lib/Request'),
-	Response: require('./lib/Response'),
-	Event: require('./lib/Event'),
-	ToyPad: require('./lib/ToyPad'),
-	ToyPadEmu: require('./lib/ToyPadEmu'),
-	Tag: require('./lib/Tag'),
+	// getters are used to lazy load libraries
+	get common(){ 	
+		return require('./lib/common')
+	},
+	get JSONRPC(){ 	
+		return require('./lib/JSONRPC')
+	},
+	get constants(){ 	
+		return require('./lib/constants')
+	},
+	get Frame(){ 	
+		return require('./lib/Frame')
+	},
+	get Request(){ 	
+		return require('./lib/Request')
+	},
+	get Response(){ 	
+		return require('./lib/Response')
+	},
+	get Event(){ 	
+		return require('./lib/Event')
+	},
+	get ToyPad(){ 	
+		return require('./lib/ToyPad')
+	},
+	get ToyPadEmu(){ 	
+		return require('./lib/ToyPadEmu')
+	},
+	get Tag(){ 	
+		return require('./lib/Tag')
+	},
+	get TEA(){ 	
+		return require('./lib/TEA')
+	},
+	get Burtle(){ 	
+		return require('./lib/Burtle')
+	},
 	transports:{
 		get TCPServerTransport() {
 			return require('./transports/tcp').TCPServerTransport
