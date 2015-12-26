@@ -1,7 +1,12 @@
 ## Node.js Lego Dimensions Library
 
-Node.js 4.1 or higher recommended. https://nodejs.org
-Tested and developed on node.js 5.0+
+
+### Requirements 
+Node.js 4.1 or newer. https://nodejs.org
+Tested and developed on node.js 4.1+
+
+#### Linux 
+libusb-1.0
 
 ### Installation
 
@@ -11,8 +16,7 @@ cd node-ld
 npm install
 ```
 
-### Windows
-
+### Windows libUSB setup (Only if using LibUSBTransport)
 Install node-4.1.2 (Latest version that works with node-usb)
 [32Bit](https://nodejs.org/dist/v4.1.2/node-v4.1.2-x86.msi)
 or
@@ -30,7 +34,7 @@ Use Zadig to (In tools folder) to install the USB driver
 
 ### Samples
 
-See samples folder for example usage
+See demo.js and toypadDemo.js in the samples folder for example usage
 
 
 
