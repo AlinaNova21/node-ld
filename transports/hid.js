@@ -47,9 +47,7 @@ HIDTransport.prototype.write = function writeData(buffer){
 		buffer = toArrayBuffer(buffer)
   }
 
-  if (!isWin) { //on non-windows, prepend report id
-    buffer = [0].concat(buffer)
-  }
+  buffer = [0].concat(buffer)
 
   if (self.dev) {
 	  self.dev.write(buffer)
