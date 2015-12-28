@@ -1,3 +1,6 @@
+console.log("Legacy code, use the ld.ToyPadEmu class instead")
+process.exit()
+
 var fs = require('fs')
 var ld = require('../')
 var Frame = ld.Frame

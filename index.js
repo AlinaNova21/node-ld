@@ -1,9 +1,6 @@
 
 module.exports = {
 	// getters are used to lazy load libraries
-	get common(){ 	
-		return require('./lib/common')
-	},
 	get JSONRPC(){ 	
 		return require('./lib/JSONRPC')
 	},
