@@ -1,5 +1,6 @@
 ## Node.js Lego Dimensions Library
 
+NOTE: This does not currently work for the Xbox version of the toypad. It will connect but no responses will be received. If someome manages to get it working, please let me know so I can make this more compatible.
 
 ### Requirements 
 Node.js 4.1 or newer. https://nodejs.org
