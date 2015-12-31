@@ -1,4 +1,4 @@
-console.log("Legacy code, use the ld.ToyPadEmu class instead")
+console.log("Legacy code, see toypadEmu.js instead")
 process.exit()
 
 var fs = require('fs')
