@@ -1,8 +1,9 @@
 var ld = require('../')
 
-var tp = new ld.ToyPadEmu({ transport: false })
+var tp = new ld.ToyPadEmu()
 
-tp.setTransport(new ld.transports.DummyTransport())
+// var tp = new ld.ToyPadEmu({ transport: false })
+// tp.setTransport(new ld.transports.DummyTransport())
 
 var TARDIS = createVehicle(1030).toString('hex').replace(/([0-9a-f]{2})/g,'$1 ')
 var TheDoctor = createCharacter(1030).toString('hex').replace(/([0-9a-f]{2})/g,'$1 ')
