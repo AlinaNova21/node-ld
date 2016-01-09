@@ -34,6 +34,9 @@ module.exports = {
 	get Burtle(){ 	
 		return require('./lib/Burtle')
 	},
+	get PWDGen(){ 	
+		return require('./lib/PWDGen')
+	},
 	transports:{
 		get TCPServerTransport() {
 			return require('./transports/tcp').TCPServerTransport
