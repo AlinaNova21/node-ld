@@ -37,6 +37,9 @@ module.exports = {
 	get PWDGen(){ 	
 		return require('./lib/PWDGen')
 	},
+	get CharCrypto(){ 	
+		return require('./lib/CharCrypto')
+	},
 	transports:{
 		get TCPServerTransport() {
 			return require('./transports/tcp').TCPServerTransport
