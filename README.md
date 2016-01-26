@@ -1,6 +1,6 @@
 ## Node.js Lego Dimensions Library
 
-NOTE: This does not currently work for the Xbox version of the toypad. It will connect but no responses will be received. If someome manages to get it working, please let me know so I can make this more compatible.
+NOTE: This does not currently work for the Xbox version of the toypad. It will connect but no responses will be received. If someone manages to get it working, please let me know so I can make this more compatible.
 
 ### Requirements 
 Node.js 4.1 or newer. https://nodejs.org
@@ -18,6 +18,8 @@ npm install
 ```
 
 ### Windows libUSB setup (Only if using LibUSBTransport)
+#### The following instructions are only needed if using the LibUSBTransport. 
+#### The default transport is HIDTransport and works without a driver install.
 Install node-4.1.2 (Latest version that works with node-usb)
 [32Bit](https://nodejs.org/dist/v4.1.2/node-v4.1.2-x86.msi)
 or
