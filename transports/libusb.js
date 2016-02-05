@@ -28,6 +28,7 @@ function LibUSBTransport(){
 	devin.on('end',function(){
 		self.emit('end')
 	})
+  	setTimeout(()=>this.emit('ready'),150)
 }
 
 LibUSBTransport.prototype.write = function(buffer){

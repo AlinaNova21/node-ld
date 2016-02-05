@@ -168,5 +168,5 @@
 { "id":1166,	"upgrademap":0, 	"rebuild":2, 	"name":"Slime Streamer" },
 { "id":1167,	"upgrademap":0, 	"rebuild":0, 	"name":"Terror Dog" },
 { "id":1168,	"upgrademap":0, 	"rebuild":1, 	"name":"Terror Dog Destroyer" },
-{ "id":1169,	"upgrademap":0, 	"rebuild":2, 	"name":"Soaring Terror Dog" },
+{ "id":1169,	"upgrademap":0, 	"rebuild":2, 	"name":"Soaring Terror Dog" }
 ]
