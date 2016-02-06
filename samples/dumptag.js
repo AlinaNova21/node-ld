@@ -1,85 +1,22 @@
-var fs = require('fs')
 var ld = require('../')
-var Frame = ld.Frame
-var Request = ld.Request
-var Response = ld.Response
-var Event = ld.Event
+var fs = require('fs')
+var async = require('async')
 
-// var usb = new ld.transports.LibUSBTransport()
-var usb = new ld.transports.RawTransport('/dev/hidraw0')
-var callbacks = new (function(){
-	var cbs = this.cbs = {}
-	this.get = function(id){
-		id = id.toString()
-		var cb = cbs[id] || null
-		delete cbs[id]
-		return cb;
-	}
-	this.set = function(id,cb){
-		id = id.toString()
-		cbs[id] = cb;
-	}
-})()
+var toypad = new ld.ToyPad()
 
-function init(){
-	var r = new Request()
-	r.cmd = Request.CMD_ACTIVATE
-	r.cid = id()
-	r.payload = new Buffer('(c) LEGO 2014')
-	write(r.build())
-	setColor(0,0xFF,0xFF,0xFF)
-}
-init()
+fs.mkdir('dumps',()=>{})
 
-usb.on('data',function(data){
-	read(data)
-	if(data[0] == 0x55)
-	{
-		var res = new Response(data)
-		var cb = callbacks.get(res.cid)
-		if(cb) cb(res)
-	}else if(data[0] == 0x56)
-	{
-		var evt = new Event(data)
-		data = evt.build()
-		var pad = evt.payload[0]
-		var index = evt.payload[2]
-		var dir = evt.payload[3]
-		var uid = evt.payload.slice(4)
-		if(dir == 00){
-			console.log('Starting dump for',uid.toString('hex'))
-			setColor(pad,0xFF,0x00,0x00)
-			dumpTag(index,function(data){
-				console.log('Finished dump for',uid.toString('hex'))
-				setColor(pad,0x00,0xFF,0x00)
-			})
-		}
-	}
+toypad.on('ready',()=>{
+	toypad.wake()
+	toypad.color(0,'#00FF00')
+	toypad.on('event',(ev)=>ev.dir?null:dumpTag(ev.uid,ev.pad,ev.index))
 })
-function read(data){
-	console.log('UX',data.toString('hex'))
-	// console.log(callbacks.cbs)
-}
-function write(data){
-	console.log('XU',data.toString('hex'))
-	// console.log(callbacks.cbs)
-	usb.write(data)
-}
 
-function setColor(pad,r,g,b){
-	var req = new Request()
-	req.cmd = Request.CMD_LIGHT
-	req.cid = id()
-	req.payload = new Buffer([pad,r,g,b])
-	write(req.build())
-}
+function dumpTag(uid,pad,index){
+	// toypad.color(pad,'#000000')
+	toypad.fade(pad,5,1,'#FF0000')
+	console.log('Starting dump for',uid.toString('hex'))
 
-var lastid = 0
-function id(){
-	return (lastid++ % 256)
-}
-function dumpTag(index,cb){
-	cb = cb || function(){}
 	var TAGSIZE = 180
 	var PAGESPERREAD = 4
 	var PAGESIZE = 4
@@ -87,30 +24,26 @@ function dumpTag(index,cb){
 	
 	var b = new Buffer(TAGSIZE)
 	b.fill(0)
+	
 	var tasks = []
 	
 	for(var page=0;page<PAGECNT;page+=PAGESPERREAD)
-		tasks.push([index,page])
+		tasks.push(page)
 
-	var worker = function(task,cb){
-		var req = new Request()
-		req.cmd = Request.CMD_READ
-		req.cid = id()
-		req.payload = new Buffer(task)
-		write(req.build())
-		// console.log('Requested page ',task[1],req.cid)
-		callbacks.set(req.cid,function(res){
-			// console.log('Received page ',task[1],req.cid,res.payload)
-			res.payload.slice(1).copy(b,(task[0]*TAGSIZE)+(task[1]*PAGESPERREAD))
+	var cnt = PAGECNT
+	var worker = function(page,cb){
+		toypad.read(index,page,(err,resp)=>{
+			// console.log('Remaining',--cnt,page,resp.payload)
+			resp.payload.slice(1).copy(b,page*PAGESPERREAD)
 			cb()
 		})
 	}
 
-	var async = require('async')
 	async.eachLimit(tasks,5,worker,function(){
-		var hex = b.toString('hex')
-		var id = hex.slice(0,6) + hex.slice(8,16)
-		fs.writeFile('dumps/'+id.toUpperCase()+'.bin',b)
-		cb(null,b)
+		toypad.color(pad,'#FFFF00')
+		fs.writeFile('dumps/'+uid.toString('hex').toUpperCase()+'.bin',b)
+		console.log('Finished dump for',uid.toString('hex'))
+		toypad.fade(pad,5,1,'#00FF00')
+		// toypad.color(pad,'#00FF00')
 	})
 }
