@@ -5,8 +5,7 @@ var rotr32 = (a,b)=>((a>>>b)|(a<<(32-b))) >>> 0
 var debug = false
 export default class CharCrypto {
 	genkey(uid){
-		var key = new Buffer(this.scramble(uid,3)+this.scramble(uid,4)+this.scramble(uid,5)+this.scramble(uid,6),'hex')
-		return flipBytes(key)
+		return new Buffer(this.scramble(uid,3)+this.scramble(uid,4)+this.scramble(uid,5)+this.scramble(uid,6),'hex')
 	}
 	encrypt(uid,charid){
 		var tea = new TEA()
@@ -14,9 +13,12 @@ export default class CharCrypto {
 		var buf = new Buffer(8)
 		buf.writeUInt32LE(charid,0)
 		buf.writeUInt32LE(charid,4)
-		return tea.encrypt(buf)
+		var ret = tea.encrypt(buf)
+		return process.browser?ret.toString('hex'):ret
+
 	}
 	decrypt(uid,data){
+		if(typeof data == 'string') data = new Buffer(data,'hex')
 		var tea = new TEA()
 		tea.key = this.genkey(uid)
 		var buf = tea.decrypt(data)
@@ -46,7 +48,7 @@ export default class CharCrypto {
 	 	}
 	 
 	 	var b = new Buffer(4)
-	 	b.writeUInt32LE(v2)
+	 	b.writeUInt32LE(v2,0)
 	 	return b.toString('hex');
 	}
 }
