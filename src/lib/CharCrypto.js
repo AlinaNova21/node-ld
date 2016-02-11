@@ -1,9 +1,9 @@
 "use strict";
 
-var TEA = require('../').TEA
+import TEA from './TEA'
 var rotr32 = (a,b)=>((a>>>b)|(a<<(32-b))) >>> 0
 var debug = false
-class CharCrypto {
+export default class CharCrypto {
 	genkey(uid){
 		var key = new Buffer(this.scramble(uid,3)+this.scramble(uid,4)+this.scramble(uid,5)+this.scramble(uid,6),'hex')
 		return flipBytes(key)
@@ -56,5 +56,3 @@ function flipBytes(buf){
         out.writeUInt32BE(buf.readUInt32LE(i) >>> 0,i)
     return out
 }
-
-module.exports = CharCrypto

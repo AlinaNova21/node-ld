@@ -1,15 +1,10 @@
 "use strict";
-var constants = require('./constants')
-var util = require('util')
-var EventEmitter = require('events').EventEmitter;
-var ld = require('../')
-var Request = ld.Request
-var Response = ld.Response
-var Event = ld.Event
+import constants from './constants'
+import * as util from 'util'
+import EventEmitter from 'events'
+import {Request,Response,Event} from '../'
 
-// util.inherits(ToyPadEmu, EventEmitter);
-
-class ToyPadEmu extends EventEmitter {
+export default class ToyPadEmu extends EventEmitter {
 	constructor(opts){
 		opts = opts || {}
 		super(opts)
@@ -200,4 +195,3 @@ class ToyPadEmu extends EventEmitter {
 	}
 	
 }
-module.exports = ToyPadEmu

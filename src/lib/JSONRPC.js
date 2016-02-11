@@ -1,7 +1,6 @@
 "use strict";
-var async = require('async')
 
-class JSONRPC {
+export default class JSONRPC {
 	constructor(base){
 		if(!base) throw new Error('base is required')
 		this.base = base
@@ -74,5 +73,3 @@ class JSONRPC {
 		return ret;
 	}
 }
-
-module.exports = JSONRPC

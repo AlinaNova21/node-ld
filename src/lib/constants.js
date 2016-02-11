@@ -18,15 +18,15 @@ var commands = {
 	CMD_ACTIVE: 0xE5,
 	CMD_LEDSQ : 0xFF,
 }
-function attachConstants(obj){
-	for(k in commands)
-		Object.defineProperty(obj,k,{
-			value: commands[k],
-			enumerable: false
-		})
+export default class constants {
+	static attach(obj){
+		for(var k in commands)
+		{
+			console.log(obj)
+			Object.defineProperty(obj,k,{
+				value: commands[k],
+				enumerable: false
+			})
+		}
+	}
 }
-
-module.exports = {
-	attach: attachConstants,
-}
-attachConstants(module.exports)

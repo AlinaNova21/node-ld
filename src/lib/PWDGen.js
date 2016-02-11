@@ -1,6 +1,6 @@
 var rotr32 = (a,b)=>((a>>>b)|(a<<(32-b))) >>> 0
 var debug = false
-function pwdgen(uid) {
+export default function pwdgen(uid) {
 	uid = new Buffer(uid,'hex')
  	var base = new Buffer("UUUUUUU(c) Copyright LEGO 2014AA");
  	uid.copy(base)
@@ -20,5 +20,3 @@ function pwdgen(uid) {
  	v2 = b.readUInt32LE(0)
  	return v2.toString(16);
 }
- 
-module.exports = pwdgen
