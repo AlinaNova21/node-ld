@@ -2,7 +2,9 @@
 import constants from './constants'
 import * as util from 'util'
 import EventEmitter from 'events'
-import {Request,Response,Event} from '../'
+import Request from './Request'
+import Response from './Response'
+import Event from './Event'
 
 export default class ToyPadEmu extends EventEmitter {
 	constructor(opts){
