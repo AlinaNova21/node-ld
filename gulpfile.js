@@ -21,7 +21,8 @@ gulp.task('bundle', ['es6'], ()=>{
 	return gulp.src('dist/browser.js')
 		.pipe(browserify({
 		  insertGlobals : true,
-		  debug : true
+		  debug : true,
+		  standalone: 'ld'
 		}))
 		.pipe(gulp.dest('./build'))
 	})
