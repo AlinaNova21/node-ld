@@ -20,6 +20,7 @@ export default class ToyPadEmu extends EventEmitter {
 		this._evqueue = []
 		this.burtle = new ld.Burtle()
 		this.tea = new ld.TEA()
+		this.tea.key = new Buffer([0x55,0xFE,0xF6,0xB0,0x62,0xBF,0x0B,0x41,0xC9,0xB3,0x7C,0xB4,0x97,0x3E,0x29,0x7B])
 		this.on('request',this.processRequest.bind(this))
 		setInterval(()=>{
 			while(this._evqueue.length)

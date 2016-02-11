@@ -7,32 +7,30 @@ function flipBytes(buf){
 
 export default class TEA {
     constructor(){
-    	this.key = new Buffer([0x55,0xFE,0xF6,0xB0,0x62,0xBF,0x0B,0x41,0xC9,0xB3,0x7C,0xB4,0x97,0x3E,0x29,0x7B])
-        this.key = flipBytes(this.key)
+
     }
 
     encrypt(buffer){
-    	var buf = new Buffer(8)
-    	var d1 = buffer.readInt32LE(0)
-    	var d2 = buffer.readInt32LE(4)
-    	var keya = [this.key.readUInt32BE(0),this.key.readUInt32BE(4),this.key.readUInt32BE(8),this.key.readUInt32BE(12)]
-    	var data = this.encipher([d1,d2],keya)
-    	buf.writeUInt32LE(data[0],0)
-    	buf.writeUInt32LE(data[1],4)
-    	// console.log('ENCRYPT',buffer.toString('hex'),buf.toString('hex'))
-    	return buf
+        if(!this.key) throw new Error('set key before using')
+        var buf = new Buffer(8)
+        var d1 = buffer.readInt32LE(0)
+        var d2 = buffer.readInt32LE(4)
+        var keya = [this.key.readUInt32LE(0),this.key.readUInt32LE(4),this.key.readUInt32LE(8),this.key.readUInt32LE(12)]
+        var data = this.encipher([d1,d2],keya)
+        buf.writeUInt32LE(data[0],0)
+        buf.writeUInt32LE(data[1],4)
+        return buf
     }
 
     decrypt(buffer){
+        if(!this.key) throw new Error('set key before using')
     	var buf = new Buffer(8)
     	var d1 = buffer.readUInt32LE(0)
     	var d2 = buffer.readUInt32LE(4)
-    	buffer = flipBytes(buffer)
-    	var keya = [this.key.readUInt32BE(0),this.key.readUInt32BE(4),this.key.readUInt32BE(8),this.key.readUInt32BE(12)]
+    	var keya = [this.key.readUInt32LE(0),this.key.readUInt32LE(4),this.key.readUInt32LE(8),this.key.readUInt32LE(12)]
     	var data = this.decipher([d1,d2],keya)
     	buf.writeUInt32LE(data[0],0)
     	buf.writeUInt32LE(data[1],4)
-    	// console.log('DECRYPT',buffer.toString('hex'),buf.toString('hex'))
     	return buf
     }
 
