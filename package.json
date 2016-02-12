@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall":"node_modules/.bin/gulp"
+    "postinstall": "node_modules/.bin/gulp"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "async": "^1.5.0",
+    "debug": "^2.2.0",
     "node-hid": "^0.5.1",
     "serialport": "^2.0.2",
     "usb": "^1.1.0"
@@ -24,8 +25,8 @@
     "gulp-uglify": "^1.5.2"
   },
   "browser": {
-    "node.js":"browser.js",
-    "index.js":"browser.js",
+    "node.js": "browser.js",
+    "index.js": "browser.js",
     "node-hid": false,
     "usb": false,
     "../transports/hid.js": false,

@@ -21,12 +21,9 @@ var commands = {
 export default class constants {
 	static attach(obj){
 		for(var k in commands)
-		{
-			console.log(obj)
 			Object.defineProperty(obj,k,{
 				value: commands[k],
 				enumerable: false
 			})
-		}
 	}
 }

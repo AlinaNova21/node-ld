@@ -5,7 +5,7 @@ export default class Burtle {
 
     init(seed) {
         var i;
-        x = this.x
+        var x = this.x
         x.a = 0xf1ea5eed;
         x.b = x.c = x.d = seed;
         for (i=0; i<42; ++i)
