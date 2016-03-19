@@ -9,10 +9,11 @@ Node.js 4.1 or newer. https://nodejs.org
 Tested and developed on node.js 4.1+
 
 I also have a repo available for PC and Arm 
-'''wget -O - http://repo.ags131.com/install.sh | sudo bash -
+
+```wget -O - http://repo.ags131.com/install.sh | sudo bash -
 sudo apt-get update
 sudo apt-get install nodejs
-'''
+```
 
 #### Linux 
 libusb-1.0
