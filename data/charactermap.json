@@ -39,8 +39,10 @@
 { "id":38,	"name":"Shaggy",		"world":"Scooby-Doo" },
 { "id":39,	"name":"Stay Puft",		"world":"Ghostbusters" },
 { "id":40,	"name":"Superman",		"world":"DC Comics" },
-{ "id":42,	"name":"Unikitty",		"world":"The LEGO Movie" },
+{ "id":41,	"name":"Unikitty",		"world":"The LEGO Movie" },
 { "id":42,	"name":"Wicked Witch",	"world":"Wizard of OZ" },
 { "id":43,	"name":"Superwoman",	"world":"DC Comics" },
-{ "id":44,	"name":"Zane",			"world":"Ninjago" }
+{ "id":44,	"name":"Zane",			"world":"Ninjago" },
+{ "id":45,  "name":"Green Arrow", "world":"DC Comics" },
+{ "id":46,  "name":"Supergirl", "world":"DC Comics" },
 ]
