@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/ags131/node-ld](https://badges.gitter.im/ags131/node-ld.svg)](https://gitter.im/ags131/node-ld?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+![npm](https://nodei.co/npm/node-ld.png "NPM")
+
 NOTE: This does not currently work for the Xbox version of the toypad. It will connect but no responses will be received. If someone manages to get it working, please let me know so I can make this more compatible.
 
 ### Requirements 
