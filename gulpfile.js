@@ -34,7 +34,7 @@ gulp.task('es6', ()=>{
 		.pipe(gulp.dest('./dist'));
 });
 
-gulp.task('bundle', [], ()=>{
+gulp.task('bundle', ['es6'], ()=>{
 	return browserify(browserifyOpts)
   		.bundle()
   		.pipe(source('./browser.js'))
