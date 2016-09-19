@@ -5,21 +5,24 @@ import EventEmitter from 'events'
 import Request from './Request'
 import Response from './Response'
 import Event from './Event'
+import RawTransport from '../transports/raw'
+import Burtle from './Burtle'
+import TEA from './TEA'
 
 export default class ToyPadEmu extends EventEmitter {
 	constructor(opts){
 		opts = opts || {}
 		super(opts)
 		if(!opts.transport && opts.transport !== false)
-			opts.transport = new ld.transports.RawTransport('/dev/hidg0')
+			opts.transport = new RawTransport('/dev/hidg0')
 		if(opts.transport) this.setTransport(opts.transport)
 		constants.attach(this)
 		this._tokens = [];
 		this._hooks = []
 		this._builtinHooks = []
 		this._evqueue = []
-		this.burtle = new ld.Burtle()
-		this.tea = new ld.TEA()
+		this.burtle = new Burtle()
+		this.tea = new TEA()
 		this.tea.key = new Buffer([0x55,0xFE,0xF6,0xB0,0x62,0xBF,0x0B,0x41,0xC9,0xB3,0x7C,0xB4,0x97,0x3E,0x29,0x7B])
 		this.on('request',this.processRequest.bind(this))
 		setInterval(()=>{
