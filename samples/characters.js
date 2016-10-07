@@ -21,8 +21,8 @@ rl.question("Enter NFC's UID: ", function(uid) {
     for (character in characters) {
         var characterCode = pad(16, cc.encrypt(uid, characters[character].id).toString("hex"), '0');
         var pwd = pad(8, PWDGen(uid).toString(16), '0');
-        console.log("... [" + characterCode.substring(0, 8)  + "] " +
-            "[" + characterCode.substring(8, 16)  + "] ... " +
+        console.log(
+            "... [" + characterCode.substring(0, 8)  + "] [" + characterCode.substring(8, 16)  + "] ... " +
             "[" + pwd + "] " + characters[character].name);
     }
   rl.close();
