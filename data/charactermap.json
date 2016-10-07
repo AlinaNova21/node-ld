@@ -47,10 +47,10 @@
 { "id":46,	"name":"Supergirl",				"world":"DC Comics" },
 { "id":47,	"name":"Abby Yates",			"world":"New Ghostbusters" },
 { "id":48,	"name":"Finn the Human",		"world":"Adventure Time" },
-{ "id":49,	"name":"Ethan Hawke",			"world":"Mission Impossible" },
+{ "id":49,	"name":"Ethan Hunt",			"world":"Mission Impossible" },
 { "id":50,	"name":"Lumpy Space Princess",	"world":"Adventure Time" },
 { "id":51,	"name":"Jake the Dog",			"world":"Adventure Time" },
 { "id":52,	"name":"Harry Potter",			"world":"Harry Potter" },
 { "id":53,	"name":"Lord Voldemort",		"world":"Harry Potter" },
-{ "id":55,	"name":"B.A. Baracus",			"world":"A-Tean" }
+{ "id":55,	"name":"B.A. Baracus",			"world":"A-Team" }
 ]
