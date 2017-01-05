@@ -11,7 +11,7 @@ rl = readline.createInterface({
   output: process.stdout
 });
 
-var characters = JSON.parse(fs.readFileSync('./data/charactermap.json', 'utf8'));
+var characters = JSON.parse(fs.readFileSync('../data/charactermap.json', 'utf8'));
 
 rl.question("Enter NFC's UID: ", function(uid) {
     var cc = new CharCrypto();
