@@ -126,9 +126,9 @@ export default class ToyPadEmu extends EventEmitter {
 
 	randomUID() {
 		var uid = new Buffer(7)
-		uid[0] = 0x04
-		uid[6] = 0x80
-		for (var i = 1; i < 6; i++)
+		uid[0] = 0x04 // vendor id 04 = NXP
+		uid[6] = 0x80 // for whatever reason the last byte of the UID is mostly 0x8*
+		for(var i=1;i<6;i++)
 			uid[i] = Math.round(Math.random() * 256) % 256
 		return uid.toString('hex').toUpperCase()
 	}
