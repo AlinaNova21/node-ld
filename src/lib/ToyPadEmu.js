@@ -91,9 +91,128 @@ export default class ToyPadEmu extends EventEmitter {
 	}
 
 	processRequest(req) {
+
+		/*
+		// start verbose logging of requests in a human readable way
+		console.log('REQUEST', req.cmd, 'with payload', req.payload)
+		if (req.cmd == this.CMD_WAKE) console.log('    => CMD_WAKE')
+		if (req.cmd == this.CMD_SEED) console.log('    => CMD_SEED')
+		if (req.cmd == this.CMD_CHAL) console.log('    => CMD_CHAL')
+		if (req.cmd == this.CMD_COL) {
+			console.log('    => CMD_COL')
+			console.log('    => pad:', req.payload[0])
+			console.log('    => red:', req.payload[1])
+			console.log('    => green:', req.payload[2])
+			console.log('    => blue:', req.payload[3])
+		}
+		if (req.cmd == this.CMD_GETCOL) {
+			console.log('    => CMD_GETCOL')
+			console.log('    => pad:', req.payload[0])
+		}
+		if (req.cmd == this.CMD_FADE) {
+			console.log('    => CMD_FADE')
+			console.log('    => pad:', req.payload[0])
+			console.log('    => speed:', req.payload[1])
+			console.log('    => cycles:', req.payload[2])
+			console.log('    => red:', req.payload[3])
+			console.log('    => green:', req.payload[4])
+			console.log('    => blue:', req.payload[5])
+		}
+		if (req.cmd == this.CMD_FLASH) {
+			console.log('    => CMD_FLASH')
+			console.log('    => pad:', req.payload[0])
+			console.log('    => color duration:', req.payload[1])
+			console.log('    => white duration:', req.payload[2])
+			console.log('    => cycles:', req.payload[3])
+			console.log('    => red:', req.payload[4])
+			console.log('    => green:', req.payload[5])
+			console.log('    => blue:', req.payload[6])
+		}
+		if (req.cmd == this.CMD_FADRD) {
+			console.log('    => CMD_FADRD - pad:', req.payload[0])
+			console.log('    => speed:', req.payload[1])
+			console.log('    => cycles:', req.payload[2])
+		}
+		if (req.cmd == this.CMD_FADAL) {
+			console.log('    => CMD_FADAL - top pad speed:', req.payload[1])
+			console.log('    => top pad cycles:', req.payload[2])
+			console.log('    => top pad red:', req.payload[3])
+			console.log('    => top pad green:', req.payload[4])
+			console.log('    => top pad blue:', req.payload[5])
+			console.log('    => left pad speed:', req.payload[7])
+			console.log('    => left pad cycles:', req.payload[8])
+			console.log('    => left pad red:', req.payload[9])
+			console.log('    => left pad green:', req.payload[10])
+			console.log('    => left pad blue:', req.payload[11])
+			console.log('    => right pad speed:', req.payload[13])
+			console.log('    => right pad cycles:', req.payload[14])
+			console.log('    => right pad red:', req.payload[15])
+			console.log('    => right pad green:', req.payload[16])
+			console.log('    => right pad blue:', req.payload[17])
+		}
+		if (req.cmd == this.CMD_FLSAL) {
+			console.log('    => CMD_FLSAL - top pad color duration:', req.payload[1])
+			console.log('    => top pad white duration:', req.payload[2])
+			console.log('    => top pad cycles:', req.payload[3])
+			console.log('    => top pad red:', req.payload[4])
+			console.log('    => top pad green:', req.payload[5])
+			console.log('    => top pad blue:', req.payload[6])
+			console.log('    => left pad color duration:', req.payload[8])
+			console.log('    => left pad white duration:', req.payload[9])
+			console.log('    => left pad cycles:', req.payload[10])
+			console.log('    => left pad red:', req.payload[11])
+			console.log('    => left pad green:', req.payload[12])
+			console.log('    => left pad blue:', req.payload[13])
+			console.log('    => right pad color duration:', req.payload[15])
+			console.log('    => right pad white duration:', req.payload[16])
+			console.log('    => right pad cycles:', req.payload[17])
+			console.log('    => right pad red:', req.payload[18])
+			console.log('    => right pad green:', req.payload[19])
+			console.log('    => right pad blue:', req.payload[20])
+		}
+		if (req.cmd == this.CMD_COLAL) {
+			console.log('    => CMD_COLAL - top pad red:', req.payload[1])
+			console.log('    => top pad green:', req.payload[2])
+			console.log('    => top pad blue:', req.payload[3])
+			console.log('    => left pad red:', req.payload[5])
+			console.log('    => left pad green:', req.payload[6])
+			console.log('    => left pad blue:', req.payload[7])
+			console.log('    => right pad red:', req.payload[9])
+			console.log('    => right pad green:', req.payload[10])
+			console.log('    => right pad blue:', req.payload[11])
+		}
+		if (req.cmd == this.CMD_TGLST) console.log('    => CMD_TGLST')
+		if (req.cmd == this.CMD_READ) {
+			console.log('    => CMD_READ')
+			console.log('    => index:', req.payload[0])
+			console.log('    => page:', req.payload[1])
+		}
+		if (req.cmd == this.CMD_WRITE) {
+			console.log('    => CMD_WRITE')
+			console.log('    => index:', req.payload[0])
+			console.log('    => page:', req.payload[1])
+			console.log('    => data', req.payload.slice(2))
+		}
+		if (req.cmd == this.CMD_MODEL) {
+			console.log('    => CMD_MODEL - payload:', req.payload)
+		}
+		if (req.cmd == this.CMD_PWD) {
+			console.log('    => CMD_PWD')
+			console.log('    => index:', req.payload[0])
+			console.log('    => authentication mode:', req.payload[1])
+		}
+		if (req.cmd == this.CMD_ACTIVE) {
+			console.log('    => CMD_ACTIVE')
+			console.log('    => active:', req.payload[0])
+		}
+		if (req.cmd == this.CMD_LEDSQ) console.log('    => CMD_LEDSQ')
+		// stop verbose logging
+		*/
+
 		var res = new Response()
 		res.cid = req.cid
 		res.payload = new Buffer(0)
+		res.payload.fill(0)
 		var active = (h) => (h.cmd == req.cmd || h.cmd == 0)
 		this._hooks.filter(active).forEach((h) => h.cb(req, res))
 		if (res._cancel) return
@@ -128,14 +247,14 @@ export default class ToyPadEmu extends EventEmitter {
 		var uid = new Buffer(7)
 		uid[0] = 0x04 // vendor id 04 = NXP
 		uid[6] = 0x80 // for whatever reason the last byte of the UID is mostly 0x8*
-		for(var i=1;i<6;i++)
+		for (var i = 1; i < 6; i++)
 			uid[i] = Math.round(Math.random() * 256) % 256
 		return uid.toString('hex').toUpperCase()
 	}
 
 	registerDefaults() {
 		this._hook(this.CMD_WAKE, (req, res) => {
-			console.log('REQUEST (CMD_WAKE)')
+			//console.log('REQUEST (CMD_WAKE)')
 			res.payload = new Buffer('286329204c45474f2032303134', 'hex')
 			this._tokens.forEach(ev => this.tagPlaceEvent(ev))
 		})
@@ -143,8 +262,9 @@ export default class ToyPadEmu extends EventEmitter {
 		this._hook(this.CMD_READ, (req, res) => {
 			var ind = req.payload[0]
 			var page = req.payload[1]
-			console.log('REQUEST (CMD_READ): index:', ind, 'page', page)
+			//console.log('REQUEST (CMD_READ): index:', ind, 'page', page)
 			res.payload = new Buffer(17)
+			res.payload.fill(0)
 			res.payload[0] = 0
 			var start = page * 4
 			var token = this._tokens.find(t => t.index == ind)
@@ -154,25 +274,41 @@ export default class ToyPadEmu extends EventEmitter {
 
 		})
 
+		this._hook(this.CMD_WRITE, (req, res) => {
+			var ind = req.payload[0]
+			var page = req.payload[1]
+			res.payload = new Buffer('00', 'hex')
+			var token = this._tokens.find(t => t.index == ind)
+			if (token)
+				req.payload.copy(token.token, 4 * page, 2, 6)
+		})
+
 		this._hook(this.CMD_MODEL, (req, res) => {
+			console.log('    => encrypted payload:', req.payload)
 			req.payload = this.decrypt(req.payload)
+			console.log('    => decrypted payload:', req.payload)
 			var index = req.payload.readUInt8(0)
+			console.log('    => index:', index)
 			var conf = req.payload.readUInt32BE(4)
-			console.log('REQUEST (CMD_MODEL): index:', index, 'conf:', conf)
+			console.log('    => conf:', conf)
 			var token = this._tokens.find(t => t.index == index)
-			//console.log(token)
 			var buf = new Buffer(8)
 			buf.writeUInt32BE(conf, 4)
 			res.payload = new Buffer(9)
+			res.payload.fill(0)
 			if (token)
-				if (token.token.id)
+				if (token.token.id) {
+					console.log('    => (OK) token found with id:', token.token.id)
 					buf.writeUInt32LE(token.token.id || 0, 0)
+				}
 				else
 					res.payload[0] = 0xF9
 			else
 				res.payload[0] = 0xF2
-			//console.log('D4',index,buf)
+			console.log('    => D4 RESPONSE - state:', res.payload[0])
+			console.log('    => D4 RESPONSE - unencrypted:', buf)
 			this.encrypt(buf).copy(res.payload, 1)
+			console.log('    => D4 RESPONSE - encrypted:', res.payload.slice(1, 9))
 		})
 
 		this._hook(this.CMD_SEED, (req, res) => {
@@ -180,7 +316,8 @@ export default class ToyPadEmu extends EventEmitter {
 			var seed = req.payload.readUInt32LE(0)
 			var conf = req.payload.readUInt32BE(4)
 			this.burtle.init(seed)
-			console.log('REQUEST (CMD_SEED): seed:', seed, 'conf', conf)
+			console.log('    => seed:', seed)
+			console.log('    => conf:', conf)
 			res.payload = new Buffer(8)
 			res.payload.fill(0)
 			res.payload.writeUInt32BE(conf, 0)
@@ -189,9 +326,8 @@ export default class ToyPadEmu extends EventEmitter {
 
 		this._hook(this.CMD_CHAL, (req, res) => {
 			req.payload = this.decrypt(req.payload)
-
 			var conf = req.payload.readUInt32BE(0)
-			console.log('REQUEST (CMD_CHAL): conf:', conf)
+			console.log('    => conf:', conf)
 			res.payload = new Buffer(8)
 			var rand = this.burtle.rand()
 			//console.log('RNG',rand.toString(16))
