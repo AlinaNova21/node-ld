@@ -52,6 +52,7 @@
     {        "id": 51,        "name": "Jake",        "world": "Adventure Time"    },
     {        "id": 52,        "name": "Harry Potter",        "world": "Harry Potter"    },
     {        "id": 53,        "name": "Voldemort",        "world": "Harry Potter"    },
+    
     {        "id": 55,        "name": "B.A. Baracus",        "world": "A-Team"    },
     {        "id": 56,        "name": "Newt",        "world": "Fantastic Beasts"    },
     {        "id": 57,        "name": "Sonic",        "world": "Sonic"    },
@@ -60,5 +61,10 @@
     {        "id": 60,        "name": "Stripe",        "world": "Gremlins"    },
     {        "id": 61,        "name": "E.T.",        "world": "E.T."    },
     {        "id": 62,        "name": "Tina",        "world": "Fantastic Beasts"    },
-    {        "id": 63,        "name": "Marceline",        "world": "Adventure Time"    }
+    {        "id": 63,        "name": "Marceline",        "world": "Adventure Time"    },
+
+
+    {        "id": 66,         "name":"Sloth", "world":"Goonies" },
+    {        "id": 67,         "name":"Hermione Granger", "world":"Harry Potter" },
+    {        "id": 68,         "name":"Chase McCain", "world":"LEGO City" },
 ]
