@@ -223,13 +223,18 @@
     {        "id": 1221,        "upgrademap": 0,        "rebuild": 0,        "name": "The Tornado"    },
     {        "id": 1222,        "upgrademap": 0,        "rebuild": 1,        "name": "* The Tornado 1"    },
     {        "id": 1223,        "upgrademap": 0,        "rebuild": 2,        "name": "* The Tornado 2"    },
-
-
-
+    {        "id": 1224,        "upgrademap": 0,        "rebuild": 0,        "name": "K.I.T.T"  },
+    {        "id": 1225,        "upgrademap": 0,        "rebuild": 1,        "name": "* K.I.T.T. JET"     },
+    {        "id": 1226,        "upgrademap": 0,        "rebuild": 2,        "name": "* GOLIATH ARMORED SEMI"     },
     {        "id": 1227,        "upgrademap": 0,        "rebuild": 0,        "name": "Police"   },
     {        "id": 1228,        "upgrademap": 0,        "rebuild": 1,        "name": "* Hovercraft"     },
-    {        "id": 1229,        "upgrademap": 0,        "rebuild": 2,        "name": "* Plane"   }
-
+    {        "id": 1229,        "upgrademap": 0,        "rebuild": 2,        "name": "* Plane"   },
+    {        "id": 1230,        "upgrademap": 0,        "rebuild": 0,        "name": "BIONIC STEED" },
+    {        "id": 1231,        "upgrademap": 0,        "rebuild": 1,        "name": "* BAT RAPTOR" },
+    {        "id": 1232,        "upgrademap": 0,        "rebuild": 2,        "name": "* ULTRA BAT" },
+    {        "id": 1233,        "upgrademap": 0,        "rebuild": 0,        "name": "BAT WING" },
+    {        "id": 1234,        "upgrademap": 0,        "rebuild": 1,        "name": "* BLACK THUNDER" },
+    {        "id": 1235,        "upgrademap": 0,        "rebuild": 2,        "name": "* BAT TANK" },
     {        "id": 1236,        "upgrademap": 0,        "rebuild": 0,        "name": "Skeleton Organ"   },
     {        "id": 1237,        "upgrademap": 0,        "rebuild": 1,        "name": "* Jukebox"    },
     {        "id": 1238,        "upgrademap": 0,        "rebuild": 2,        "name": "* Skele-Turkey"   },
@@ -238,5 +243,5 @@
     {        "id": 1241,        "upgrademap": 0,        "rebuild": 2,        "name": "* Inferno"    },
     {        "id": 1242,        "upgrademap": 0,        "rebuild": 0,        "name": "Buckbeak"     },
     {        "id": 1243,        "upgrademap": 0,        "rebuild": 1,        "name": "* Giant Owl"  },
-    {        "id": 1244,        "upgrademap": 0,        "rebuild": 2,        "name": "* Fierce Falcon"  },
+    {        "id": 1244,        "upgrademap": 0,        "rebuild": 2,        "name": "* Fierce Falcon"  }
 ]
