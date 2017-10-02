@@ -18,5 +18,5 @@ export default function pwdgen(uid) {
  	var b = new Buffer(4)
  	b.writeUInt32BE(v2,0)
  	v2 = b.readUInt32LE(0)
- 	return v2.toString(16);
+ 	return ('00000000' + v2.toString(16)).slice(-8);
 }
